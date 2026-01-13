@@ -28,7 +28,33 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+
+        // Cek jika user memiliki role 'super_admin'
+        if ($user->hasRole('super_admin')) {
+
+            // Arahkan ke dashboard admin
+            return redirect()->intended(route('admin.dashboard'));
+        }
+        // Jika bukan super_admin, cek apakah user memiliki role 'citizen'
+        else if ($user->hasRole('citizen')) {
+
+            // Arahkan ke dashboard citizen
+            return redirect()->intended(route('citizen.dashboard'));
+        }
+        // Jika tidak memiliki kedua role di atas
+        else {
+
+            // Logout user secara otomatis
+            Auth::logout();
+
+            // Invalidate session dan regenerate token untuk keamanan
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+
+            // Arahkan kembali ke halaman login dengan pesan error
+            return redirect('login')->with('error', 'Anda tidak memiliki hak akses yang valid.');
+        }
     }
 
     /**
