@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('admin.admin_master')
 @section('title', 'Ubah Data Hadiah | WargaLapor')
 
 @push('style')

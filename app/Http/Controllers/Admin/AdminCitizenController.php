@@ -24,7 +24,7 @@ class AdminCitizenController extends Controller
 
     public function create()
     {
-        return view('admin.citizencitizen_create');
+        return view('admin.citizen.citizen_create');
     }
 
     public function store(UserStoreRequest $request)

@@ -53,14 +53,14 @@
                                         {{$reward->is_active == 1 ? 'Aktif' : 'Tidak Aktif'}}
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ route('admin.rewards.edit', $reward->id) }}" class="btn btn-outline-primary mr-1 mb-2">
+                                        <a href="{{ route('admin.rewards.edit', $reward->id) }}" class="btn btn-outline-primary mr-1">
                                             <i class="fas fa-fw fa-edit"></i> Ubah
                                         </a>
 
                                         <!-- Delete -->
                                         <button
                                             type="button"
-                                            class="btn btn-outline-danger mr-2 btn-delete-reward"
+                                            class="btn btn-outline-danger"
                                             data-toggle="modal"
                                             data-target="#deleteRewardModal"
                                             data-id="{{ $reward->id }}"
