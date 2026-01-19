@@ -6,7 +6,9 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminReportController;
 use App\Http\Controllers\Admin\AdminRewardController;
 use App\Http\Controllers\Citizen\CitizenDashboardController;
+use App\Http\Controllers\Citizen\CitizenProfileController;
 use App\Http\Controllers\Citizen\CitizenReportController;
+use App\Http\Controllers\Citizen\CitizenRewardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +19,26 @@ Route::middleware('auth')->group(function () {
     // Role User/Citizen
     Route::middleware('role:citizen')->group(function () {
 
-        Route::get('/dashboard', [CitizenDashboardController::class, 'index'])->name('citizen.dashboard');
+        Route::get('/dashboard', [CitizenDashboardController::class, 'dashboard'])->name('citizen.dashboard');
+
+        // profile
+        Route::get('/profile', [CitizenProfileController::class, 'index'])->name('citizen.profile.index');
+        Route::get('/profile/edit', [CitizenProfileController::class, 'edit'])->name('citizen.profile.edit');
+        Route::put('/profile', [CitizenProfileController::class, 'update'])->name('citizen.profile.update');
 
         // Laporan
         Route::get('/reports', [CitizenReportController::class, 'index'])->name('citizen.reports.index');
         Route::get('/report/create', [CitizenReportController::class, 'create'])->name('citizen.reports.create');
         Route::post('/report/store', [CitizenReportController::class, 'store'])->name('citizen.reports.store');
 
-        Route::get('/report/{report}/show', [CitizenReportController::class, 'show'])->name('citizen.reports.show');
+        Route::get('/report/{report:code}/show', [CitizenReportController::class, 'show'])->name('citizen.reports.show');
 
         Route::delete('/report/{report}/destroy', [CitizenReportController::class, 'destroy'])->name('citizen.reports.destroy');
+
+        // Tukar Poin
+        Route::get('/rewards', [CitizenRewardController::class, 'index'])->name('citizen.rewards.index');
+
+        Route::post('/rewards/{reward}/redeem', [CitizenRewardController::class, 'redeem'])->name('citizen.rewards.redeem');
     });
 
 
