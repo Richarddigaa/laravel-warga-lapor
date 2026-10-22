@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="list-group list-group-flush">
-                    @forelse ($user->reports as $report)
+                    @forelse ($paginateUserReports as $report)
                     @php
                     $statusClass = match ($report->latest_status) {
                     'pending' => 'bg-secondary-subtle text-secondary-emphasis',

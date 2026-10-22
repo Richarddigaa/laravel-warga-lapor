@@ -76,6 +76,9 @@ Ikuti langkah-langkah berikut untuk menginstal project ini secara lokal:
 8. **Akses aplikasi**:
    Buka browser Anda dan kunjungi [http://127.0.0.1:8000](http://127.0.0.1:8000) untuk melihat aplikasi Anda.
 
+9. **Import Database**:
+   Buka folder database import file warga_lapor.sql.
+
 ## Catatan Tambahan
 
 - Pastikan file `.env` sudah disesuaikan dengan konfigurasi database Anda.

@@ -331,15 +331,15 @@
                 <div class="card-body p-4">
                     <div class="row text-center">
                         <div class="col-md-4 mb-3">
-                            <div class="stat-value fw-bold text-primary">{{ $reportCount }}</div>
+                            <div class="stat-value fw-bold text-primary">23,567</div>
                             <div class="text-secondary">Jumlah Laporan Sekarang</div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <div class="stat-value fw-bold text-primary">{{ $reportResolved }}</div>
+                            <div class="stat-value fw-bold text-primary">18,567</div>
                             <div class="text-secondary">Laporan Selesai</div>
                         </div>
                         <div class="col-md-4">
-                            <div class="stat-value fw-bold text-primary">{{ $citizens }}</div>
+                            <div class="stat-value fw-bold text-primary">4,345</div>
                             <div class="text-secondary">Warga Aktif</div>
                         </div>
                     </div>

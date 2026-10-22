@@ -79,10 +79,60 @@ class Report extends Model
         ])->orderBy('created_at', 'desc')->get();
     }
 
+    // query untuk mengambil semua laporan paginate
+    public static function getAllReportsPaginate()
+    {
+        return Report::with([
+            'user',
+            'category',
+            'files',
+            'statuses',
+            'ledgers'
+        ])->orderBy('created_at', 'desc')->paginate(5);
+    }
+
     // query untuk mengambil semua laporan milik user
     public static function getUserReports()
     {
         return Report::with(['user'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+    }
+
+    // query untuk mengambil semua laporan milik user paginate
+    public static function getUserPaginateReports()
+    {
+        return Report::with(['user'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(3);
+    }
+
+    // query untuk mengambil laporan terverifikasi milik user
+    public static function getUserVerifiedReports()
+    {
+        return Report::with(['user'])->where('user_id', auth()->user()->id)
+            ->where('latest_status', 'verified')
+            ->orderBy('created_at', 'desc')->get();
+    }
+
+    // query untuk mengambil laporan sedang diproses milik user
+    public static function getUserInProgressReports()
+    {
+        return Report::with(['user'])->where('user_id', auth()->user()->id)
+            ->where('latest_status', 'in_progress')
+            ->orderBy('created_at', 'desc')->get();
+    }
+
+    // query untuk mengambil laporan sudah diselesaikan milik user
+    public static function getUserResolvedReports()
+    {
+        return Report::with(['user'])->where('user_id', auth()->user()->id)
+            ->where('latest_status', 'resolved')
+            ->orderBy('created_at', 'desc')->get();
+    }
+
+    // query untuk mengambil laporan ditolak milik user
+    public static function getUserRejectedReports()
+    {
+        return Report::with(['user'])->where('user_id', auth()->user()->id)
+            ->where('latest_status', 'rejected')
+            ->orderBy('created_at', 'desc')->get();
     }
 
     // query untuk mengambil laporan yang sudah diverifikasi

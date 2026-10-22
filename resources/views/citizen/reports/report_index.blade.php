@@ -170,7 +170,7 @@
         </div>
 
         <div class="d-flex justify-content-center mt-4">
-            {{ $reports->links() }}
+            {{ $reports->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </main>

@@ -13,7 +13,7 @@ class CitizenDashboardController extends Controller
 {
     public function landingPage()
     {
-        $reports = Report::getAllReports();
+        $reports = Report::getAllReportsPaginate();
         $reportCount = Report::count();
         $reportResolved = Report::getResolvedReports()->count();
         $citizens = User::getAllCitizens()->count();
@@ -27,14 +27,17 @@ class CitizenDashboardController extends Controller
 
         $totalPoints = PointLedger::getTotalPoints($user->id);
 
+        $paginateUserReports = Report::getUserPaginateReports();
+
         $reportUserCount = Report::getUserReports()->count();
-        $reportVerified = Report::getVerifiedReports()->count();
-        $reportInProgress = Report::getInProgressReports()->count();
-        $reportResolved = Report::getResolvedReports()->count();
-        $reportRejected = Report::getRejectedReports()->count();
+        $reportVerified = Report::getUserVerifiedReports()->count();
+        $reportInProgress = Report::getUserInProgressReports()->count();
+        $reportResolved = Report::getUserResolvedReports()->count();
+        $reportRejected = Report::getUserRejectedReports()->count();
 
         return view('citizen.dashboard', compact(
             'user',
+            'paginateUserReports',
             'totalPoints',
             'reportUserCount',
             'reportVerified',
